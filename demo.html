@@ -3,11 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-    
+
     <title>jQuery.popover demo page</title>
     <link rel="stylesheet" href="_page.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="popover.css" type="text/css" media="screen" />
-    
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.popover-1.1.0.js"></script>
     <script type="text/javascript">
@@ -16,10 +16,11 @@
         $("#ex1").popover({
           trigger: 'click'
         });
-        $("#ex2").popover({
-          title: "Hello",
-          content: "<p>Finally, I can speak!</p><p>asdasdasd</p><p>asdasdasdasdasd</p>"
+
+        $("header a").popover({
+          content: $('#example-content')
         });
+
         $("#ex3a").popover({
           title: "<_<",
           content: "Damn.",
@@ -99,7 +100,7 @@
             "ajax.html"
           ).popover('title', "It's AJAX content!").popover('show');
         });
-        
+
         /**
          * Collapse code blocks
          */
@@ -121,7 +122,7 @@
             }
           })
         });
-        
+
         /**
          * Table of contents
          */
@@ -148,7 +149,7 @@
             item.href = href;
             item.title = title;
             item.items = {};
-            
+
             var split = $this.attr('name').split('_');
             if(split.length > 1)
               toc[split[0]].items[name] = item;
@@ -156,7 +157,7 @@
               toc[name] = item;
           });
           toc_el.empty();
-          
+
           $.each(toc, function(i, val) {
             toc_el.append(toc_paragraph(val));
           });
@@ -167,33 +168,37 @@
     </script>
   </head>
   <body>
+    <header>
+      <a href="#" style="float: right; margin-right: 30px">X</a>
+    </header>
+
     <h1>jQuery.popover</h1>
     <p>Easy to use and customizable popover plugin for jQuery.</p>
     <p>Take a look at <a href="http://wp.me/p12l3P-gT">this blog post</a> for more details.</p>
-    
+
     <a name="toc"></a>
     <h2>Table of Contents</h2>
     <ul id="table_of_contents"></ul>
-    
+
     <a name="usage"></a>
     <h2>Usage</h2>
-    
+
     <a name="usage_initialization"></a>
     <h3>Initialization</h3>
     <p>With default settings, calling $(element).popover(); will initalize an empty popover on the element.</p>
-    
+
     <div class="sandbox">
       <a href="#" id="ex1">I have a popover, but you can't see me. Yet.</a>
     </div>
-    
+
     <p>When you click the link above, the popover is shown. This is achieved by using <code>{ trigger: 'click' }</code> in the parameters. <em>You can hide the popover by clicking anywhere there's not a popover.</em> The source code for the above example is:</p>
     <pre><code>$("#ex1").popover({
   trigger: 'click'
 });</code></pre>
-    <p>When this code was executed, the popover was created but not shown. A <code>click</code> event was bound to the <code>a</code>-tag with which the popover is &#147;connected&#148;. When that element is clicked, the popover is shown.
-      
+    <p id="example-content">When this code was executed, the popover was created but not shown. A <code>click</code> event was bound to the <code>a</code>-tag with which the popover is &#147;connected&#148;. When that element is clicked, the popover is shown.</p>
+
     <p>But hows an empty popover any fun? Let's try this:</p>
-    
+
     <div class="sandbox">
       <a href="#" id="ex2">Please, let me speak!</a>
     </div>
